@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  api:
+    build:
+      dockerfile: ./docker/rails.dockerfile
+      context: .
+    image: jus/rails
+    container_name: api
+    volumes:
+      - ./:/var/www/api
+    ports:
+      - "39128:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: challenge.jus
+      POSTGRES_USER: challenge.jus
+    ports:
+      - "39127:5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
