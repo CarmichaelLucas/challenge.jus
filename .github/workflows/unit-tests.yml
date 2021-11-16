@@ -1,13 +1,14 @@
-name: Lint Rubocop
+name: Unit Tests
 
-on: 
-  push: 
+on:
+  workflow_run:
+    workflows: ['Lint Rubocop']
     branches: [main, develop]
-  pull_request:
-    branches: [main]
+    type:
+      - completed
 
 jobs:
-  rubocop-lint:
+  rspec-with-ruby:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,4 +16,4 @@ jobs:
         with:
           ruby-version: '3.0.2'
       - run: bundle install
-      - run: rubocop
+      - run: bundle exec rspec
