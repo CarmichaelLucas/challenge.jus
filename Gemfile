@@ -33,6 +33,9 @@ gem 'active_model_serializers', '~> 0.10.12'
 # Complete validation of dates, times and datetimes for Rails 6.x and ActiveModel.
 gem 'validates_timeliness', '~> 6.0.0.alpha1'
 
+# Simple, efficient background processing for Ruby.
+gem 'sidekiq', '~> 6.3', '>= 6.3.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -1,18 +1,14 @@
 version: '3'
 
 services:
-  api:
-    build:
-      dockerfile: ./docker/rails.dockerfile
-      context: .
-    image: jus/rails
-    container_name: api
-    volumes:
-      - ./:/var/www/api
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server
+    volumes: 
+      - ./tmp/db:/var/lib/redis/data
     ports:
-      - "39128:3000"
-    depends_on:
-      - db
+      - "6379:6379"
 
   db:
     image: postgres
@@ -22,6 +18,40 @@ services:
       POSTGRES_PASSWORD: challenge.jus
       POSTGRES_USER: challenge.jus
     ports:
-      - "39127:5432"
+      - "5432:5432"
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+
+  api:
+    build:
+      dockerfile: ./docker/rails.dockerfile
+      context: .
+    image: jus/api
+    container_name: api
+    volumes:
+      - ./:/var/www/api
+    command: bundle exec rails s -b "0.0.0.0"
+    environment:
+      REDIS_URL: "redis://redis:6379/2"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+
+  sidekiq:
+    build:
+      dockerfile: ./docker/rails.dockerfile
+      context: .
+    image: jus/sidekiq
+    container_name: sidekiq
+    command: bundle exec sidekiq
+    volumes:
+      - ./:/var/www/api
+      - /var/www/api/tmp
+    environment:
+      REDIS_URL: "redis://redis:6379/2"
+    depends_on:
+      - db
+      - redis
+      - api

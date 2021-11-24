@@ -12,10 +12,9 @@ RUN gem update --system \
 
 WORKDIR /var/www/api
 
-COPY . .
+COPY ./Gemfile .
+COPY ./Gemfile.lock .
 
 RUN bundle install
 
 EXPOSE 3000
-
-CMD ["rails", "s", "-b", "0.0.0.0"]
