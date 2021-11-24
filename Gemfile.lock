@@ -74,6 +74,7 @@ GEM
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
@@ -149,6 +150,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rspec-core (3.10.1)
@@ -188,6 +190,10 @@ GEM
     ruby-progressbar (1.11.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
+    sidekiq (6.3.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -227,6 +233,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   shoulda-matchers (~> 5.0)
+  sidekiq (~> 6.3, >= 6.3.1)
   spring
   tzinfo-data
   validates_timeliness (~> 6.0.0.alpha1)

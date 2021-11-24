@@ -15,7 +15,8 @@ migrate:
 # make remove
 remove: down
 	@docker container prune
-	@docker image rmi jus/rails
+	@docker image rmi jus/api
+	@docker image rmi jus/sidekiq
 
 # make sh
 sh:

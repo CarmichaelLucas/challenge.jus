@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration[6.1]
   def change
     create_table :articles do |t|
       t.string :title
-      t.boolean :status
+      t.string :status
       t.datetime :publish_at
       t.references :category, null: false, foreign_key: true
 
