@@ -12,6 +12,10 @@ up:
 migrate:	
 	@docker-compose run api rails db:drop db:create db:migrate
 
+# make seed
+seed:
+	@docker-compose run api rails db:seed
+
 # make remove
 remove: down
 	@docker container prune
