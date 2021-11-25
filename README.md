@@ -72,6 +72,8 @@ app/
 │   ├── page_service.rb
 │   ├── category_service.rb
 │   └── article_service.rb
+├── serializers
+│   └── article_serializer.rb
 ├── models
 │   ├── page.rb
 │   ├── concerns
@@ -101,17 +103,27 @@ app/
 *Exemplo de Response:*
 
 ```json
-[
-  {
-    "id": 1,
-    "title": "Sed pretium rhoncus nibh a rhoncus.",
-    "status": "active",
-    "publish_at": "2021-11-25T01:26:23.832Z",
-    "category_id": 5,
-    "created_at": "2021-11-25T01:27:27.916Z",
-    "updated_at": "2021-11-25T01:27:27.916Z"
-  }
-]
+{
+  "data": [
+    {
+      "id": "1",
+      "type": "articles",
+      "attributes": {
+        "title": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+        "status": "active",
+        "publish-at": "2021-11-25T01:45:17.909Z"
+      },
+      "relationships": {
+        "category": {
+          "data": {
+            "id": 5,
+            "name": "default"
+          }
+        }
+      }
+    }
+  ]
+}
 ```
 
 
@@ -124,14 +136,22 @@ app/
 
 ```json
 {
-    "id": 1,
-    "title": "Sed pretium rhoncus nibh a rhoncus.",
-    "status": "active",
-    "publish_at": "2021-11-25T01:26:23.832Z",
-    "category_id": 5,
-    "created_at": "2021-11-25T01:27:27.916Z",
-    "updated_at": "2021-11-25T01:27:27.916Z"
-}
+      "id": "1",
+      "type": "articles",
+      "attributes": {
+        "title": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+        "status": "active",
+        "publish-at": "2021-11-25T01:45:17.909Z"
+      },
+      "relationships": {
+        "category": {
+          "data": {
+            "id": 5,
+            "name": "default"
+          }
+        }
+      }
+    }
 ```
 
 
@@ -167,3 +187,8 @@ app/
 }
 ```
 
+## Sidekiq
+
+Para verificar o painel do `sidekiq` acesse:
+
+> http://0.0.0.0:3000/sidekiq
