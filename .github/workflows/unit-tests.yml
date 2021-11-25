@@ -1,11 +1,10 @@
 name: Unit Tests
 
-on:
-  workflow_run:
-    workflows: ["Lint Rubocop"]
+on: 
+  push: 
     branches: [main, develop]
-    type:
-      - completed
+  pull_request:
+    branches: [main]
 
 jobs:
   rspec-with-ruby:
