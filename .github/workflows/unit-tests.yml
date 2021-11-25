@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
   workflow_run:
-    workflows: ['Lint Rubocop']
+    workflows: ["Lint Rubocop"]
     branches: [main, develop]
     type:
       - completed
